@@ -45,5 +45,5 @@
         #└── Reproducibility.Rproj 
 #Labeling the file tree and providing descriptions for each file helps users understand the project structure. #Can put file tree on github. 
 
-####Zenodo#### 
+####Zenodo####  
 #Zenodo provides a DOI (digital object identifier) that links back to your work, making it citable. #Zenodo and github must be linked.
