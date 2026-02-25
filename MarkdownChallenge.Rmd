@@ -1,0 +1,94 @@
+---
+title: "Coding Challenge 4"
+author: "Kamerin Sandlin"
+date: "2026-02-19"
+output:
+  html_document:
+    df_print: paged
+    toc: true
+    toc_depth: 2
+    toc_float: true
+--- 
+Coding Challenge 4
+https://doi.org/10.1094/PDIS-06-21-1253-RE
+
+# Question 1a
+AA YAML Header is the title information at the top of a document. It can display an HTML file by default which cannot be read on github.
+
+# Question 1B
+Literate programming is pretty much exactly what I'm doing. Making source code in a repository but annotating it in plain english to where it is explained what that code does. 
+
+
+# Question 2
+Take the code you wrote for coding challenge 3, question 5, and incorporate it into your R markdown file. 
+
+ANSWER: 
+SeedMassgwc <- SeedMassPlot + geom_pwc(data = MycData, aes(group = Treatment), method = "t.test", label = "{p.adj.format}{p.adj.signif}")
+  This is how you add the pairwise comparison to a plot, seed mass plot for example. 
+
+FinalPlot <- ggarrange(SeedMassgwc, X15gwc, DONgwcPlot, ncol = 3, nrow = 1, common.legend = TRUE)
+  This is how the final plot was all put together using ggarrange. 
+
+
+# Question 2A 
+At the top of the document, make a clickable link to the manuscript where these data are published.
+
+ANSWER: 
+Noel, Z.A., Roze, L.V., Breunig, M., Trail, F. 2022. Endophytic fungi as promising biocontrol agent to protect wheat from Fusarium graminearum head blight. Plant Disease. https://doi.org/10.1094/PDIS-06-21-1253-RE 
+
+
+
+# Question 2B 
+Read the data using a relative file path with na.strings option set to “na”. This means you need to put the Mycotoxin.csv file we have used for the past two weeks into your directory, which git tracks.
+```{r}
+
+```
+
+
+ANSWER: 
+MycotoxinData$'15ADON'[MycotoxinData$'15ADON` %in% c("nd", "na")] <- NA
+  This is because the 15ADON column was the only one giving na.strings troubles, so the "na.strings" code was mapped to 15ADON specifically. 
+
+
+
+# Question 2C
+Make a separate code chunk for the figures plotting the DON data, 15ADON, and Seedmass, and one for the three combined using ggarrange.
+
+Library ggplot2
+```{r}
+library(ggplot2)
+library(ggpubr)
+```
+
+```{r}
+#DON Plot
+#ggplot(MycotoxinData, aes(x = Treatment, y = DON, fill = Cultivar)) + geom_boxplot(position = position_dodge(width = 0.75)) + geom_jitter(aes(color = Cultivar), position = position_jitterdodge(jitter.width = 0.2, dodge.width = 1), shape = 20, size = 2, alpha = 0.6) + scale_fill_manual(values = mycolors) + scale_color_manual(values = mycolors) + ylab("DON (ppm)") + xlab("") + theme_classic() + coord_cartesian(ylim = c(0, 210)) + facet_wrap(~Cultivar)
+
+#X15Plot
+#ggplot(MycotoxinData, aes(x = Treatment, y = '15ADON', fill = Cultivar)) + geom_boxplot(position = position_dodge(width = 0.75)) + geom_jitter(aes(color = Cultivar), position = position_jitterdodge(jitter.width = 0.2, dodge.width = 0.9), alpha = 0.6, size = 2) + scale_fill_manual(values = mycolors) + scale_color_manual(values = mycolors) + ylab("15ADON") + xlab("") + theme_classic()
+
+#Seed Mass Plot
+#ggplot(MycotoxinData, aes(x = Treatment, y = MassperSeed_mg, fill = Cultivar)) + geom_boxplot(position = position_dodge(width = 0.9)) + geom_jitter(aes(color = Cultivar), position = position_jitterdodge(jitter.width = 0.2, dodge.width = 0.9), alpha = 0.6, size = 2) + scale_fill_manual(values = mycolors) + scale_color_manual(values = mycolors) + ylab("Seed Mass (mg)") + xlab("") + theme_classic() 
+
+#Combined Plot, using ggarrange
+#CombinedPlot <- ggarrange(DONPlot, SeedMassPlot, X15Plot, labels =c("A", "B", "C"), common.legend = TRUE) 
+
+```
+
+
+
+# Question 3
+Knit your document together into a format of choice (docx, pdf, md)
+Done via knit option, I picked HTML file type. 
+
+
+
+# Question 4 
+Push the .docx or .pdf and .md files to GitHub inside a directory called Coding Challenge 4.
+Pushed. 
+
+
+# Question 5
+Now edit, commit, and push the README file for your repository and include the following elements:
+A. A clickable link in your README to your GitHub flavored .md file
+B. A file tree of your GitHub repository. 
