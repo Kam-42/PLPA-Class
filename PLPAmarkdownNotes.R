@@ -1,7 +1,16 @@
 #R Markdown Notes #Must install knitr, rmarkdown, pandoc #pandoc will convert Rmarkdown #Rmarkdown > Markdown > Document #Also install tinytex  
 
 ####YAML Header and Knitting #### 
-#To add an R markdown file, go to the same place in the top left that you would open and brand new R script, but click R markdown. #Title: Whatever the header title is #Author: Kamerin Sandlin #Date: yep #Can change output type (html_document:, word_document:, etc) #Can generate table of contents in markdown output toc: true #this must be indented into document type #EX: html_document toc: true toc_float: true #another way to make the links more professional looking. #These are generally unreadable by github. Must be in markdown file type md_document: variant: gfa #gfa = github flavored markdown 
+#To add an R markdown file, go to the same place in the top left that you would open and brand new R script, but click R markdown. 
+#Title: Whatever the header title is 
+#Author: Kamerin Sandlin 
+#Date: yep #Can change output type (html_document:, word_document:, etc) 
+#Can generate table of contents in markdown output toc: true 
+#this must be indented into document type 
+#EX: html_document toc: true toc_float: true 
+#another way to make the links more professional looking. 
+#These are generally unreadable by github. Must be in markdown file type md_document: variant: gfa 
+#gfa = github flavored markdown 
 
 ####Code Chunks#### 
 

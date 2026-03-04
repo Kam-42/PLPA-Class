@@ -1,0 +1,39 @@
+---
+title: "Coding Challenge 4"
+author: "Kamerin Sandlin"
+date: "2026-02-19"
+output:
+  html_document:
+    variant: gfm 
+    df_print: paged
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+# Question 1a
+AA YAML Header is the title information at the top of a document. It can display an HTML file by default which cannot be read on GitHub.
+
+# Question 1b
+Literate programming is pretty much exactly what I'm doing. Making source code in a repository but annotating it in plain English so that it is explained what the code does.
+
+# Question 2
+Take the code you wrote for coding challenge 3, question 5, and incorporate it into your R Markdown file.
+
+## 2a
+At the top of the document, make a clickable link to the manuscript where these data are published.
+
+## 2b
+Read the data using a relative file path with `na.strings` option set to "na".
+
+## 2c
+Make a separate code chunk for the figures plotting the DON data, 15ADON, and Seedmass, and one for the three combined using `ggarrange`.
+
+# Question 3
+Knit your document together into ONE format of choice (docx, pdf, md).
+
+# Question 4
+Push the .docx or .pdf and .md files to GitHub inside a directory called Coding Challenge 4.
+
+# Question 5
+Now edit, commit, and push the README file for your repository and include the following elements:
