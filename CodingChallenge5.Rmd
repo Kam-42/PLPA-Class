@@ -1,0 +1,73 @@
+---
+title: "Code Challenge: Data Wrangling"
+author: "Kamerin Sandlin"
+date: "2026-03-05"
+output: 
+  md_document:
+        variant: gfm 
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+
+1. Download two .csv files from Canvas called DiversityData.csv and Metadata.csv, and read them into R using relative file paths.
+ANSWER: 
+```{r}
+metadata  <- read.csv("Datasets/Metadata.csv")
+diversity <- read.csv("Datasets/DiversityData.csv")
+```
+
+2. Join the two dataframes together by the common column ‘Code’. Name the resulting dataframe 'alpha'.
+ANSWER:
+```{r}
+alpha <- left_join(diversity, metadata, by = "Code")
+```
+
+3. Calculate Pielou’s evenness index: Pielou’s evenness is an ecological parameter calculated by the Shannon diversity index (column Shannon) divided by the log of the richness column.
+ANSWER: 
+```{r}
+alpha_even <- alpha %>% mutate(Pielou_evenness = shannon / log(richness))
+```
+
+4. Using tidyverse language of functions and the pipe, use the summarise function and tell me the mean and standard error evenness grouped by crop over time.
+ANSWER:
+```{r}
+alpha_average <- alpha_even %>%
+     group_by(Crop, Time_Point) %>%
+     summarise(mean_evenness = mean(`Pielou_evenness`, na.rm = TRUE), count = n(), sd_evenness = sd(`Pielou_evenness`, na.rm = TRUE), se_evenness = sd_evenness / sqrt(count))
+```
+
+5. Calculate the difference between the soybean column, the soil column, and the difference between the cotton column and the soil column
+ANSWER:
+```{r}
+alpha_average2 <- alpha_average %>%
+  select(Time_Point, Crop, mean_evenness) %>%
+  pivot_wider(names_from = Crop, values_from = mean_evenness) %>%
+  mutate(
+    diff.cotton.even = Soil - Cotton,
+    diff.soybean.even = Soil - Soybean)
+```
+
+6. Connecting it to plots; Start with the alpha_average2 dataframe and select the columns Time_Point, diff.cotton.even, and diff.soybean.even. Reshape the data by Use the pivot_longer function to transform the data from wide to long format, creating a new column named diff that contains the values from diff.cotton.even and diff.soybean.even. 
+ANSWER:
+```{r}
+alpha_average2 %>% 
+  select(Time_Point, diff.cotton.even, diff.soybean.even) %>% 
+  pivot_longer(cols = c(diff.cotton.even, diff.soybean.even), names_to = "diff", values_to = "values") %>% 
+  ggplot(aes(x = Time_Point, y = values, color = diff)) + geom_line()
+```
+The select line will parse just the three types of value wanted.
+pivot_longer will transform the data from wide to long format.
+**NOTE: AI was used by me to figure out what was wrong with my code that was making it not work, AI gave me this specific code and it finally worked. 
+
+7. Commit and push a gfm .md file to GitHub inside a
+directory called Coding Challenge 5. Provide me a link to
+your github written as a clickable link in your .pdf or .docx
+ANSWER:
+Pushed to github under the name CodingChallenge5 
+
+
